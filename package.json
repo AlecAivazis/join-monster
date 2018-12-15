@@ -1,5 +1,5 @@
 {
-  "name": "join-monster",
+  "name": "join-monster-nulls-last",
   "version": "2.1.0",
   "description": "A GraphQL to SQL query execution layer for batch data fetching.",
   "main": "dist/index.js",
