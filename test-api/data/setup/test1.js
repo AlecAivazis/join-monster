@@ -4,7 +4,6 @@ module.exports = async db => {
   await knex.batchInsert('accounts', [
     {
       id: 1,
-      email_address: 'andrew@stem.is',
       first_name: 'andrew',
       last_name: 'carlson'
     },

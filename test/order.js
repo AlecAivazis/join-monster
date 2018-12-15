@@ -98,3 +98,31 @@ test('it sould handle order on many-to-many', async t => {
   }
   t.deepEqual(expect, data)
 })
+
+test('it should put nulls last when told to do so', async t => {
+  const query = `{
+    user(id: 3) {
+      following(nullsLast: true) {
+        email
+      }
+    }
+  }`
+  const { data, errors } = await run(query)
+  errCheck(t, errors)
+  const expect = {
+    user: {
+      following: [
+        {
+          email: 'foo@example.org'
+        },
+        {
+          email: 'matt@stem.ks'
+        },
+        {
+          email: null
+        }
+      ]
+    }
+  }
+  t.deepEqual(expect, data)
+})

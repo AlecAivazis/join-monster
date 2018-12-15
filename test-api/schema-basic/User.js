@@ -110,7 +110,14 @@ const User = new GraphQLObjectType({
       junction: {
         sqlTable: q('relationships', DB),
         orderBy: args => args.oldestFirst ? { followee_id: 'desc' } : null,
-        where: (table, args) => args.intimacy ? `${table}.${q('closeness', DB)} = '${args.intimacy}'` : false,
+        orderBy: args => {
+          if (args.oldestFirst) {
+            return { followee_id: 'desc' }
+          } else if (args.nullsLast) {
+            return { fullName: 'desc nulls last' }
+          }
+          return null
+        },
         include: {
           friendship: {
             sqlColumn: 'closeness',
